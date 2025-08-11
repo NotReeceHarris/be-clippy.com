@@ -9,6 +9,7 @@
     let watermark = $state(false)
     let hex = $state("#ffffff")
     let retry: number | null = $state(null)
+    let noMouse = $state(false)
 
     let clippyCanvas: (HTMLCanvasElement | null)[] = $state(Array.from({ length: clippyCount }, (_) => null));
     let clippyImages: (HTMLImageElement | null)[] = $state(Array.from({ length: clippyCount }, (_) => null));
@@ -91,8 +92,11 @@
 
     onMount(()=>{
         if (!browser) return;
-
         retry = setInterval(renderClippys, 1000);
+
+        if(window.matchMedia("(any-hover: none)").matches) {
+            noMouse = true;
+        }
     })
 
 </script>
@@ -147,7 +151,7 @@
 
             {#each clippys as _, clippyIndex}
                 <div class="group relative flex flex-col place-items-center place-content-center aspect-square rounded-lg border border-black/30">
-                    <button onclick={()=>download(clippyIndex)} class="group-hover:block hidden absolute top-2 right-2 rounded-lg bg-white border text-black/90 border-black/30 p-2 cursor-pointer" aria-label="Download">
+                    <button onclick={()=>download(clippyIndex)} class="{noMouse ? '' : 'group-hover:block md:hidden'} absolute top-2 right-2 rounded-lg bg-white border text-black/90 border-black/30 p-2 cursor-pointer" aria-label="Download">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path opacity="1" d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"></path></svg>
                     </button>
                     {#if clippyLoading[clippyIndex]}

@@ -18,6 +18,7 @@
 		"@sveltejs/vite-plugin-svelte": "^6.0.0",
 		"@tailwindcss/vite": "^4.0.0",
 		"svelte": "^5.0.0",
+		"svelte-awesome-color-picker": "^4.0.2",
 		"svelte-check": "^4.0.0",
 		"tailwindcss": "^4.0.0",
 		"typescript": "^5.0.0",

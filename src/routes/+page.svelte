@@ -1,22 +1,23 @@
 
 <script lang="ts">
 
+    import ColorPicker from 'svelte-awesome-color-picker';
     import { browser } from '$app/environment';
     import { onMount } from 'svelte';
     import clippys from '$lib/clippys';
 
     let watermark = $state(false)
-    let background = $state("#ffffff")
+    let hex = $state("#ffffff")
 
     let clippyCanvas: (HTMLCanvasElement | null)[] = Array.from({ length: clippys.length }, (_, i) => null);
     let clippyImages: (HTMLImageElement | null)[] = Array.from({ length: clippys.length }, (_, i) => null);
 
     // return either black or white based on background colour
     function getTextColour() {
-        const hex = background.replace('#', '');
-        const r = parseInt(hex.substring(0, 2), 16);
-        const g = parseInt(hex.substring(2, 4), 16);
-        const b = parseInt(hex.substring(4, 6), 16);
+        const h = hex.replace('#', '');
+        const r = parseInt(h.substring(0, 2), 16);
+        const g = parseInt(h.substring(2, 4), 16);
+        const b = parseInt(h.substring(4, 6), 16);
         const brightness = (r * 299 + g * 587 + b * 114) / 1000;
         return brightness > 128 ? 'black' : 'white';
     }
@@ -52,7 +53,7 @@
 
 
                 // draw background
-                ctx.fillStyle = background;
+                ctx.fillStyle = hex;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 // draw text to canvas "be-clippy.com" rotated 90 degress
@@ -126,12 +127,12 @@
                 Link movement on your profile picture.
             </label>
 
-            <div class="flex place-items-center gap-2">
-                <input type="color" id="background" bind:value={background} onchange={renderClippys}>
-                <label for="background">
-                    Background color
-                </label>
-            </div>
+            <ColorPicker
+                bind:hex
+                onInput={renderClippys}
+                label="Background color"
+                position="responsive"
+            />
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -146,6 +147,16 @@
             {/each}
 
         </div>
+
+        <footer class="flex flex-col sm:flex-row place-items-center gap-3 text-black/70 justify-between">
+
+            <p>License under GPL-3.0</p>
+
+            <p>
+                Contribute to the movement on <a class="underline" href="https://github.com/NotReeceHarris/be-clippy.com">Github</a>.
+            </p>
+
+        </footer>
     
     </div>
 

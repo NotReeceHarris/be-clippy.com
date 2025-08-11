@@ -18,6 +18,9 @@ const clippys = [
         "name": "Royal",
         "image": "royalty.png"
     },{
+        "name": "Snowy",
+        "image": "snowy.png"
+    },{
         "name": "Miku",
         "image": "miku.png"
     },{

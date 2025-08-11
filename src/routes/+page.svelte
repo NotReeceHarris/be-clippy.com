@@ -169,7 +169,7 @@
             <p>License under GPL-3.0</p>
 
             <p>
-                Contribute to the movement on <a class="underline" href="https://github.com/NotReeceHarris/be-clippy.com">Github</a>.
+                Share your own on <a class="underline" href="https://github.com/NotReeceHarris/be-clippy.com">Github</a>.
             </p>
 
         </footer>

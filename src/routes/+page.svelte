@@ -4,15 +4,15 @@
     import ColorPicker from 'svelte-awesome-color-picker';
     import { browser } from '$app/environment';
     import { onMount } from 'svelte';
-    import clippys from '$lib/clippys';
+    import clippys, { clippyCount } from '$lib/clippys';
 
     let watermark = $state(false)
     let hex = $state("#ffffff")
     let retry: number | null = $state(null)
 
-    let clippyCanvas: (HTMLCanvasElement | null)[] = $state(Array.from({ length: clippys.length }, (_, i) => null));
-    let clippyImages: (HTMLImageElement | null)[] = $state(Array.from({ length: clippys.length }, (_, i) => null));
-    let clippyLoading: boolean[] = $state(Array.from({ length: clippys.length }, (_, i) => true));
+    let clippyCanvas: (HTMLCanvasElement | null)[] = $state(Array.from({ length: clippyCount }, (_) => null));
+    let clippyImages: (HTMLImageElement | null)[] = $state(Array.from({ length: clippyCount }, (_) => null));
+    let clippyLoading: boolean[] = $state(Array.from({ length: clippyCount }, (_) => true));
 
     // return either black or white based on background colour
     function getTextColour() {

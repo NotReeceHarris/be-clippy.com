@@ -1,4 +1,4 @@
-export default [
+const clippys = [
     {
         "name": "OG Clippy",
         "image": "clippy.png"
@@ -12,3 +12,6 @@ export default [
         "image": "orange.png"
     }
 ]
+
+export const clippyCount = clippys.length;
+export default clippys;

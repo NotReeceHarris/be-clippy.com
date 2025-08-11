@@ -6,7 +6,7 @@
     import { onMount } from 'svelte';
     import clippys, { clippyCount } from '$lib/clippys';
 
-    let watermark = $state(true)
+    let watermark = $state(false)
     let hex = $state("#ffffff")
     let retry: number | null = $state(null)
     let noMouse = $state(false)
@@ -131,13 +131,20 @@
             </p>
         </div>
 
-        <iframe class="rounded-lg aspect-video w-full" src="https://www.youtube-nocookie.com/embed/2_Dtmpe9qaQ?si=A9g2Ufxt_8vzXW4p" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe class="rounded-lg aspect-video w-full my-3" src="https://www.youtube-nocookie.com/embed/2_Dtmpe9qaQ?si=A9g2Ufxt_8vzXW4p" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         
-        <div class="flex gap-8 place-items-center">
-            <label for="watermark">
-                <input type="checkbox" id="watermark" bind:checked={watermark} onchange={renderClippys}>
-                Link movement on your profile picture.
-            </label>
+        <div class="flex flex-col sm:flex-row gap-3 md:gap-6">
+            <div class="flex gap-2 place-items-center">
+                <input class="hidden" type="checkbox" id="watermark" bind:checked={watermark} onchange={renderClippys}>
+                <button aria-label="Toggle watermark" onclick={() => { watermark = !watermark; renderClippys(); }} class="relative flex flex-col place-items-center justify-center cursor-pointer ml-1 border border-black rounded-full size-6 {watermark ? 'bg-blue-500' : 'bg-white'}">
+                    {#if watermark}
+                        <svg class="size-3 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path opacity="1" d="M243.31,90.91l-128.4,128.4a16,16,0,0,1-22.62,0l-71.62-72a16,16,0,0,1,0-22.61l20-20a16,16,0,0,1,22.58,0L104,144.22l96.76-95.57a16,16,0,0,1,22.59,0l19.95,19.54A16,16,0,0,1,243.31,90.91Z"></path></svg>
+                    {/if}
+                </button>
+                <label for="watermark" class="mb-1 cursor-pointer">
+                    Include link in pfp
+                </label>
+            </div>
 
             <ColorPicker
                 bind:hex

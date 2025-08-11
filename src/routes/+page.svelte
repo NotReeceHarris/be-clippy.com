@@ -111,11 +111,15 @@
             </strong>
 
             <p>
-                Are you fed up with trillion-dollar companies exploiting your data? Forcing you to use their services? Holding your data for ransom? Using your data to train their AI models? Using opt-outs for data collection instead of opt-ins?
+                Fed up with trillion-dollar companies exploiting your data?
+                Forced to use their services?
+                Your data held for ransom?
+                Your data used to train their AI models?
+                Opt-outs for data collection instead of opt-ins?
             </p>
 
             <p>
-                Join the movement to make companies more like Clippy. <span class="text-black/90 font-semibold">Set your profile picture to a Clippy</span>, make your voice heard. 
+                Join the movement to make companies more like Clippy. <span class="text-black/90 font-semibold">Set your profile picture to Clippy</span>, make your voice heard. 
             </p>
 
             <p>

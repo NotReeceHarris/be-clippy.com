@@ -1,38 +1,9 @@
-# sv
+# Be Like Clippy 📎
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+> "Clippy didn’t sell your data. Clippy didn’t hold your data hostage. Clippy was there to help you."
 
-## Creating a project
+Are you fed up with trillion-dollar companies exploiting your data? Forcing you to use their services? Holding your data for ransom? Using your data to train their AI models? Using opt-outs for data collection instead of opt-ins?
 
-If you're seeing this, you've probably already done this step. Congrats!
+Join the movement to make companies more like Clippy. Set your profile picture to a Clippy, make your voice heard.
 
-```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Below is a video that explains the Be Like Clippy movement. It’s a call to action for developers, companies, and users alike to embrace a more open, transparent, and user-friendly approach to technology.

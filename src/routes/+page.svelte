@@ -8,9 +8,11 @@
 
     let watermark = $state(false)
     let hex = $state("#ffffff")
+    let retry: number | null = $state(null)
 
-    let clippyCanvas: (HTMLCanvasElement | null)[] = Array.from({ length: clippys.length }, (_, i) => null);
-    let clippyImages: (HTMLImageElement | null)[] = Array.from({ length: clippys.length }, (_, i) => null);
+    let clippyCanvas: (HTMLCanvasElement | null)[] = $state(Array.from({ length: clippys.length }, (_, i) => null));
+    let clippyImages: (HTMLImageElement | null)[] = $state(Array.from({ length: clippys.length }, (_, i) => null));
+    let clippyLoading: boolean[] = $state(Array.from({ length: clippys.length }, (_, i) => true));
 
     // return either black or white based on background colour
     function getTextColour() {
@@ -33,11 +35,12 @@
         link.remove();
     }
 
-    function renderClippys() {
+    async function renderClippys() {
         if (!browser) return;
+        if (retry) clearInterval(retry);
 
-        for (let i = 0; i < clippys.length; i++) {
-            try {
+        Promise.all(
+            clippys.map(async (_, i) => {
                 const clippy = clippys[i];
                 let canvas = clippyCanvas[i];
 
@@ -49,8 +52,7 @@
                 canvas.width = 243;
                 canvas.height = 243;
                 const ctx = canvas.getContext('2d');
-                if (!ctx) continue;
-
+                if (!ctx) return;
 
                 // draw background
                 ctx.fillStyle = hex;
@@ -70,26 +72,28 @@
                 let img = clippyImages[i];
 
                 if (img) {
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    continue;
+                    await ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    return clippyLoading[i] = false;
                 }
 
                 img = new Image();
                 img.src = '/clippys/' + clippy.image;
                 clippyImages[i] = img;
 
-                img.onload = () => {
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                img.onload = async () => {
+                    await ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    clippyLoading[i] = false;
                 };
-            } catch (error) {
-                console.error(error);
-            }
-
-        }
+            })
+        )
 
     }
 
-    onMount(renderClippys)
+    onMount(()=>{
+        if (!browser) return;
+
+        retry = setInterval(renderClippys, 1000);
+    })
 
 </script>
 
@@ -142,6 +146,10 @@
                     <button onclick={()=>download(clippyIndex)} class="group-hover:block hidden absolute top-2 right-2 rounded-lg bg-white border text-black/90 border-black/30 p-2 cursor-pointer" aria-label="Download">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path opacity="1" d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"></path></svg>
                     </button>
+                    {#if clippyLoading[clippyIndex]}
+                        <svg class="z-10 absolute size-8 animate-spin opacity-70" style="color: {getTextColour()};" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    {/if}
+
                     <canvas bind:this={clippyCanvas[clippyIndex]} class="rounded-lg"></canvas>
                 </div>
             {/each}

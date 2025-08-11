@@ -173,7 +173,9 @@
 
         <footer class="flex flex-col sm:flex-row place-items-center gap-3 text-black/70 justify-between">
 
-            <p>License under GPL-3.0</p>
+            <p>
+                Licensed under <a class="underline" href="https://github.com/NotReeceHarris/be-clippy.com/blob/main/LICENSE">GPL-3.0</a>
+            </p>
 
             <p>
                 Share your own on <a class="underline" href="https://github.com/NotReeceHarris/be-clippy.com">Github</a>.

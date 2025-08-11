@@ -12,6 +12,12 @@ const clippys = [
         "name": "Yummy",
         "image": "yummy.png"
     },{
+        "name": "Deal With It",
+        "image": "deal-with-it.png"
+    },{
+        "name": "Royal",
+        "image": "royalty.png"
+    },{
         "name": "Miku",
         "image": "miku.png"
     },{

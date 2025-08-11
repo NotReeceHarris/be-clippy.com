@@ -94,7 +94,7 @@
 
 <div>
 
-    <div class="mx-auto max-w-screen-md h-full w-full py-8 flex flex-col gap-6">
+    <div class="mx-auto max-w-screen-md px-6 md:px-0 h-full w-full py-8 flex flex-col gap-6">
 
         <div class="flex flex-col gap-5 text-xl text-black/70">
             <h1 class="text-4xl font-bold text-black">
@@ -134,9 +134,9 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
-            {#each clippys as clippy, clippyIndex}
+            {#each clippys as _, clippyIndex}
                 <div class="group relative flex flex-col place-items-center place-content-center aspect-square rounded-lg border border-black/30">
                     <button onclick={()=>download(clippyIndex)} class="group-hover:block hidden absolute top-2 right-2 rounded-lg bg-white border text-black/90 border-black/30 p-2 cursor-pointer" aria-label="Download">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path opacity="1" d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"></path></svg>

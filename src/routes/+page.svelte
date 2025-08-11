@@ -6,7 +6,7 @@
     import { onMount } from 'svelte';
     import clippys, { clippyCount } from '$lib/clippys';
 
-    let watermark = $state(false)
+    let watermark = $state(true)
     let hex = $state("#ffffff")
     let retry: number | null = $state(null)
     let noMouse = $state(false)
@@ -50,8 +50,8 @@
                     clippyCanvas[i] = canvas;
                 }
 
-                canvas.width = 243;
-                canvas.height = 243;
+                canvas.width = 1080;
+                canvas.height = 1080;
                 const ctx = canvas.getContext('2d');
                 if (!ctx) return;
 
@@ -62,9 +62,9 @@
                 // draw text to canvas "be-clippy.com" rotated 90 degress
                 if (watermark) {
                     ctx.save();
-                    ctx.font = "16px sans-serif";
+                    ctx.font = "75px sans-serif";
                     ctx.fillStyle = getTextColour();
-                    ctx.translate((canvas.width / 2) + 40, (canvas.height / 2) - 10);
+                    ctx.translate((canvas.width / 2) + 190, (canvas.height / 2) - 50);
                     ctx.rotate(Math.PI / 2);
                     ctx.fillText("be-clippy.com", 0, 0);
                     ctx.restore();

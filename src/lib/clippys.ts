@@ -12,11 +12,17 @@ const clippys = [
         "name": "Yummy",
         "image": "yummy.png"
     },{
+        "name": "Harpy",
+        "image": "harpy.png"
+    },{
         "name": "Deal With It",
         "image": "deal-with-it.png"
     },{
         "name": "Royal",
         "image": "royalty.png"
+    },{
+        "name": "Holy",
+        "image": "holy.png"
     },{
         "name": "Snowy",
         "image": "snowy.png"

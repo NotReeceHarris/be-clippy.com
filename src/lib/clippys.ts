@@ -35,6 +35,9 @@ const clippys = [
     },{
         "name": "Orange Clippy",
         "image": "orange.png"
+    },{
+        "name": "Mega Man",
+        "image": "megaman.png"
     }
 ]
 
